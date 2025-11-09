@@ -13,7 +13,7 @@ data <- fread("E:/GAIA_BD/final_77777777777/Abundance/Abundance2/Abundance_covar
 hist(data$NO)
 data[, log_NO := log(NO + 1)]  # Adding 1 to avoid issues with log(0)
 hist(data$log_NO)
-
+ 
 
 # Inspect the data
 str(data)
