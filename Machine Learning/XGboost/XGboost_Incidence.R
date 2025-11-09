@@ -27,8 +27,8 @@ test_matrix <- xgb.DMatrix(data = as.matrix(test_data[, independent_vars, with =
 
 # Setting up grid for hyperparameter tuning
 grid <- expand.grid(
-  eta = c(0.01, 0.05, 0.1),  # 학습률
-  max_depth = c(4, 6, 8),    # 트리 깊이
+  eta = c(0.01, 0.05, 0.1),  
+  max_depth = c(4, 6, 8),    
   min_child_weight = c(1, 5, 10),
   subsample = c(0.6, 0.8, 1),
   colsample_bytree = c(0.6, 0.8, 1)
@@ -95,7 +95,7 @@ cat("MAE:", mae, "\n")
 ############################cross validation####################################
 ################################################################################
 library(ggplot2)
-library(MASS)  # For kde2d
+library(MASS)  
 library(ggExtra)
 
 # Create a data frame for plotting with Actual vs. Predicted values
@@ -104,7 +104,7 @@ cv_plot_data <- data.frame(
   Predicted = preds
 )
 
-# # Find min and max values for Actual and Predicted
+# Find min and max values for Actual and Predicted
 x_min <- min(cv_plot_data$Actual, na.rm = TRUE)
 x_max <- max(cv_plot_data$Actual, na.rm = TRUE)
 y_min <- min(cv_plot_data$Predicted, na.rm = TRUE)
