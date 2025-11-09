@@ -87,7 +87,7 @@ ggplot(tuned_importance_df, aes(x = reorder(Variable, Importance), y = Importanc
   coord_flip() +
   labs(title = "Tuned Model Variable Importance", x = "Variables", y = "Importance")
 
-##########################variable importance
+##########################variable importance############################
 ggplot(tuned_importance_df, aes(x = reorder(Variable, Importance), y = Importance, fill = Importance)) +
   geom_bar(stat = 'identity') +
   coord_flip() +
