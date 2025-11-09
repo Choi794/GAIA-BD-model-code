@@ -27,8 +27,8 @@ test_matrix <- xgb.DMatrix(data = as.matrix(test_data[, independent_vars, with =
 
 # Setting up grid for hyperparameter tuning
 grid <- expand.grid(
-  eta = c(0.01, 0.05, 0.1),  # 학습률
-  max_depth = c(4, 6, 8),    # 트리 깊이
+  eta = c(0.01, 0.05, 0.1),  
+  max_depth = c(4, 6, 8),    
   min_child_weight = c(1, 5, 10),
   subsample = c(0.6, 0.8, 1),
   colsample_bytree = c(0.6, 0.8, 1)
@@ -96,7 +96,7 @@ cat("MAE:", mae, "\n")
 ################################################################################
 
 library(ggplot2)
-library(MASS)  # For kde2d
+library(MASS)  
 library(ggExtra)
 
 # Create a data frame for plotting with Actual vs. Predicted values
@@ -123,8 +123,8 @@ mae <- mean(abs(lm_model$residuals))
 
 # Create the base plot with scatter points and density visualization
 p <- ggplot(cv_plot_data, aes(x = Predicted, y = Actual)) +
-  geom_point(color = "steelblue", alpha = 0.5, size = 4) +  # Scatter plot 추가
-  geom_smooth(method = "lm", se = FALSE, size = 1.2, aes(linetype = "Trendline", color = "Trendline")) +     #orientation = 'y'
+  geom_point(color = "steelblue", alpha = 0.5, size = 4) +  
+  geom_smooth(method = "lm", se = FALSE, size = 1.2, aes(linetype = "Trendline", color = "Trendline")) +     
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "black", size = 1) +
   labs(
     title = NULL,
