@@ -14,7 +14,6 @@ hist(data$NO)
 data[, log_NO := log(NO + 1)]  # Adding 1 to avoid issues with log(0)
 hist(data$log_NO)
  
-
 # Inspect the data
 str(data)
 summary(data)
@@ -35,8 +34,6 @@ test_data <- data[-train_index, ]
 # Build the ranger model
 ranger_model <- ranger(as.formula(paste(dependent_var, "~", paste(independent_vars, collapse = " + "))), 
                        data = train_data, importance = 'impurity')
-
-
 
 # Print the model summary
 print(ranger_model)
@@ -73,7 +70,6 @@ cv_results <- ranger_tuned$results
 cat("Cross-Validation RMSE:", min(cv_results$RMSE), "\n")
 cat("Cross-Validation R-squared:", max(cv_results$Rsquared), "\n")
 
-
 # Evaluate the tuned model on the test set
 tuned_predictions <- predict(ranger_tuned, newdata = test_data)
 
@@ -102,11 +98,7 @@ ggplot(tuned_importance_df, aes(x = reorder(Variable, Importance), y = Importanc
     plot.title = element_text(size = 16, face = "bold")  
   )
 
-
-
 test_actuals <- test_data[[dependent_var]]
-
-
 
 # Plot fitted vs actual values
 fitted_vs_actual <- data.frame(Fitted = tuned_predictions, Actual = test_actuals)
@@ -123,7 +115,6 @@ cat("MAE: ", mae, "\n")
 tuned_rmse <- sqrt(mean((tuned_predictions - test_data[[dependent_var]])^2))
 cat("Tuned RMSE: ", tuned_rmse, "\n")
 
-
 ################################################################################
 ############################cross validation####################################
 ################################################################################
@@ -132,13 +123,11 @@ library(ggplot2)
 library(MASS)  
 library(ggExtra)
 
-
 # Create a data frame for plotting with Actual vs. Predicted values
 cv_plot_data <- data.frame(
   Actual = test_data[[dependent_var]],
   Predicted = tuned_predictions
 )
-
 
 # # Find min and max values for Actual and Predicted
 x_min <- min(cv_plot_data$Predicted, na.rm = TRUE)
@@ -150,13 +139,11 @@ y_max <- max(cv_plot_data$Actual, na.rm = TRUE)
 range_min <- min(x_min, y_min)
 range_max <- max(x_max, y_max)
 
-
 # Calculate linear regression model and metrics
 lm_model <- lm(Actual ~ Predicted, data = cv_plot_data)
 rmse <- sqrt(mean(lm_model$residuals^2))
 r_sq <- summary(lm_model)$r.squared
 mae <- mean(abs(lm_model$residuals))
-
 
 # Create the base plot with scatter points and density visualization
 p <- ggplot(cv_plot_data, aes(x = Predicted, y = Actual)) +
