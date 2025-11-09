@@ -105,7 +105,7 @@ cv_plot_data <- data.frame(
   Predicted = preds
 )
 
-# # Find min and max values for Actual and Predicted
+# Find min and max values for Actual and Predicted
 x_min <- min(cv_plot_data$Actual, na.rm = TRUE)
 x_max <- max(cv_plot_data$Actual, na.rm = TRUE)
 y_min <- min(cv_plot_data$Predicted, na.rm = TRUE)
