@@ -35,7 +35,6 @@ test_data <- data[-train_index, ]
 ranger_model <- ranger(as.formula(paste(dependent_var, "~", paste(independent_vars, collapse = " + "))), 
                        data = train_data, importance = 'impurity')
 
-
 # Print the model summary
 print(ranger_model)
 importance <- importance(ranger_model)
@@ -70,7 +69,6 @@ best_model <- ranger_tuned$finalModel
 cv_results <- ranger_tuned$results
 cat("Cross-Validation RMSE:", min(cv_results$RMSE), "\n")
 cat("Cross-Validation R-squared:", max(cv_results$Rsquared), "\n")
-
 
 # Evaluate the tuned model on the test set
 tuned_predictions <- predict(ranger_tuned, newdata = test_data)
@@ -117,14 +115,12 @@ cat("MAE: ", mae, "\n")
 tuned_rmse <- sqrt(mean((tuned_predictions - test_data[[dependent_var]])^2))
 cat("Tuned RMSE: ", tuned_rmse, "\n")
 
-
 ################################################################################
 ############################cross validation####################################
 ################################################################################
 library(ggplot2)
 library(MASS)  
 library(ggExtra)
-
 
 # Create a data frame for plotting with Actual vs. Predicted values
 cv_plot_data <- data.frame(
@@ -142,7 +138,6 @@ y_max <- max(cv_plot_data$Actual, na.rm = TRUE)
 range_min <- min(x_min, y_min)
 range_max <- max(x_max, y_max)
 
-
 # Calculate linear regression model and metrics
 lm_model <- lm(Actual ~ Predicted, data = cv_plot_data)
 rmse <- sqrt(mean(lm_model$residuals^2))
@@ -151,7 +146,6 @@ mae <- mean(abs(lm_model$residuals))
 print(rmse)
 print(r_sq)
 print(mae)
-
 
 # Create the base plot with scatter points and density visualization
 p <- ggplot(cv_plot_data, aes(x = Predicted, y = Actual)) +
